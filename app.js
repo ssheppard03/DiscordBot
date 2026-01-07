@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import ffmpeg from 'ffmpeg-static';
-import { existsSync } from 'fs';
+import fs from 'fs';
 import { Client, GatewayIntentBits, Events } from 'discord.js';
 import { DisTube } from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
@@ -25,7 +25,13 @@ const spotify = new SpotifyPlugin({
   }
 });
 
-const ffmpegPath = "C:\\ProgramData\\chocolatey\\lib\\ffmpeg-full\\tools\\ffmpeg\\bin\\ffmpeg.exe";
+// Setup youtube
+const youtube = new YouTubePlugin({
+  cookies: JSON.parse(fs.readFileSync("cookies.json")),
+});
+
+
+const ffmpegPath = "/usr/bin/ffmpeg";
 
 // Setup DisTube
 const distube = new DisTube(client, {
@@ -33,8 +39,8 @@ const distube = new DisTube(client, {
   emitNewSongOnly: true,
   nsfw: true,
   emitAddSongWhenCreatingQueue: true,
-  ffmpeg: {path: ffmpeg, alwaysCreateProcess: true},
-  plugins: [spotify, new SoundCloudPlugin(), new YouTubePlugin()]
+  ffmpeg: {path: ffmpegPath, alwaysCreateProcess: true, ffmpegArgs: ['-loglevel', 'debug']},
+  plugins: [spotify, new SoundCloudPlugin(), youtube]
 });
 
 client.once(Events.ClientReady, c => {
