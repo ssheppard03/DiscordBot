@@ -4,3 +4,6 @@ allowBuilds:
   ffmpeg-static: true
 patchedDependencies:
   '@distube/yt-dlp': patches/@distube__yt-dlp.patch
+overrides:
+  tar: ^7.5.22
+  'minimatch@3>brace-expansion': ^1.1.18
