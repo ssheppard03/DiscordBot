@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { REST, Routes } from 'discord.js';
 
-const usingTestServer = true;
+const usingTestServer = false;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, 'commands');
