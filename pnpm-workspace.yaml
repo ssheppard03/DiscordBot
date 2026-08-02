@@ -1,3 +1,6 @@
 allowBuilds:
-  '@discordjs/opus': true 
-  ffmpeg-static: true 
+  '@discordjs/opus': true
+  '@distube/yt-dlp': true
+  ffmpeg-static: true
+patchedDependencies:
+  '@distube/yt-dlp': patches/@distube__yt-dlp.patch

@@ -1,0 +1,8 @@
+services:
+  bot:
+    image: ghcr.io/ssheppard03/discordbot:latest
+    build: .
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
